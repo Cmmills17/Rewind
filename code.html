@@ -156,6 +156,37 @@ function displayMessage() {
 
     <!-- Prism JS -->
     <script src="/js/prism.js"></script>
+
+    <script>
+        Prism.plugins.NormalizeWhitespace.setDefaults({
+            'remove-trailing': true,
+            'remove-indent': true,
+            'left-trim': true,
+            'right-trim': true
+        })
+
+        const codeBlock = document.querySelector('#codeSample');
+
+        fetch('/js/site.js')
+            .then(response => response.text())
+            .then(text => {
+                text = removeComments(text);
+                text = removeEmptyLines(text);
+
+                codeBlock.textContent = text
+
+                Prism.highlightElement(codeBlock);
+            });
+
+        function removeComments(str) {
+            return str.replace(/\/\/.*$/gm, '');
+        }
+
+        function removeEmptyLines(str) {
+            return str.replace(/(\n{2,})(?!(function))/g, '\n');
+        }
+    </script>
+
 </body>
 
 </html>

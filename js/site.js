@@ -1,22 +1,39 @@
-function displayMessage() {
+//get the message that was entered
+function getMessage() {
 
-    //get the <input /> element from the page
-    let inputElement = document.getElementById('messageInput')
-    //inputElement = <input id="messageInput" class="form-control" stlye="max-width: 16rem" placeholder="Enter a Message" />
+    // Find the input id="msgInput" element
+    let inputElement = document.getElementById('msgInput');
 
-    //get the text that was typed into the input element
-    let message = inputElement.value;
+    // Get what the user typed out of the <input />
+    let userString = inputElement.value;
 
+    // validate that the user typed at least 2 characters
 
-    //use alert() to show the text that was typed
-    Swal.fire(
-        {
-            backdrop: false,
-            title: 'App Name',
-            text: message,
-        }
-    );
+    if (userString.length < 2) {
+        // --> if not, show a swal
+        Swal.fire(
+            {
+                backdrop: false,
+                title: 'Uh Oh!',
+                text: 'Please enter a message with at least 2 characters to reverse',
+                icon: 'error',
+            }
+        );
+    } else {
+        // reverse the message
+        let revString = reverseMessage(userString);
 
+        //display the reversed message
+        displayMessage(revString);
+    }
+}
+
+// reverse the message
+function reverseMessage(message) {
 
 }
 
+//display the message
+function displayMessage(reversedMessage) {
+
+}
